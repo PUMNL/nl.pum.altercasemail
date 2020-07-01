@@ -15,8 +15,10 @@ function altercasemail_civicrm_alterMailParams(&$params, $context) {
   /*
    * issue 2561 <http://redmine.pum.nl/issues/2561>
    * remove case hash key from subject if present
+   *
+   * Note: On cases params subject is in lowercase, On Mailings params subject is capitalized as Subject
    */
-  if ($params['subject']) {
+  if (!empty($params['subject'])) {
     if (substr($params['subject'], 0, 7) == "[case #") {
       $endPos = strpos($params['subject'], "]");
       $params['subject'] = substr($params['subject'], $endPos + 2);
